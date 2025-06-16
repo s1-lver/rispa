@@ -59,5 +59,13 @@ public partial class MainWindow : Form
             return;
         }
         var imagePath = cmp_selectFileDialog.FileName;
+        var validation = ImageHandler.ValidateImage(imagePath);
+        if (!validation.Item1)
+        {
+            DisplayException(validation.Item2);
+            return;
+        }
+        SelectedImage = ImageHandler.LoadBitmapFromPath(imagePath);
+        DisplaySelectedImage(SelectedImage);
     }
 }
